@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101322">
+  <title>Adaptive Arcade — AI Reflex Trainer</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Adaptive Arcade home"><span class="brand-mark">✦</span><span>adaptive<span class="brand-light">arcade</span></span></a>
+      <div class="status-pill"><span class="status-dot"></span><span id="ai-status">AI ready to learn</span></div>
+    </header>
+
+    <section class="intro">
+      <div class="eyebrow"><span></span> REINFORCEMENT LEARNING IN ACTION</div>
+      <h1>Your game.<br><span>Your level.</span></h1>
+      <p>Hit the targets. The AI learns your rhythm and tunes the challenge as you play.</p>
+    </section>
+
+    <section class="game-layout" aria-label="Game and performance dashboard">
+      <div class="game-column">
+        <div class="game-card">
+          <div class="game-toolbar">
+            <div class="level-indicator"><span class="level-icon">◈</span><div><small>AI DIFFICULTY</small><strong id="difficulty-label">Easy</strong></div></div>
+            <div class="timer-wrap"><span>TIME</span><strong id="timer">60</strong></div>
+            <div class="score-wrap"><span>SCORE</span><strong id="score">0</strong></div>
+          </div>
+          <div id="playfield" class="playfield" aria-label="Game area">
+            <div id="idle-message" class="idle-message"><div class="target-preview">+</div><strong>Ready when you are</strong><span>Start a round and tap the targets</span></div>
+            <button id="target" class="target" type="button" aria-label="Hit target" hidden>+</button>
+            <div id="feedback" class="feedback" aria-live="polite"></div>
+            <div id="paused-overlay" class="paused-overlay" hidden><strong>Paused</strong><span>Your session is waiting</span></div>
+          </div>
+          <div class="game-controls">
+            <button id="start-button" class="button button-primary" type="button"><span>▶</span> Start game</button>
+            <button id="pause-button" class="button button-secondary" type="button" disabled>Ⅱ <span>Pause</span></button>
+            <button id="restart-button" class="icon-button" type="button" aria-label="Restart game" title="Restart">↻</button>
+          </div>
+          <div class="game-hint"><span>✦</span> Your AI adjusts after every hit or miss</div>
+        </div>
+        <div class="how-card"><div class="how-icon">⌁</div><div><strong>How to play</strong><p>Click each glowing target before it disappears. Faster hits and fewer misses earn more points.</p></div></div>
+      </div>
+
+      <aside class="dashboard">
+        <div class="dashboard-heading"><div><div class="eyebrow">LIVE DASHBOARD</div><h2>Your performance</h2></div><span class="live-badge"><i></i> LIVE</span></div>
+        <div class="stat-grid">
+          <article class="stat-card"><span class="stat-icon purple">◎</span><span class="stat-label">ACCURACY</span><strong id="accuracy">—<small>%</small></strong><div class="stat-note" id="accuracy-note">No attempts yet</div></article>
+          <article class="stat-card"><span class="stat-icon cyan">ϟ</span><span class="stat-label">AVG. REACTION</span><strong id="reaction">—<small> ms</small></strong><div class="stat-note">Hit speed</div></article>
+          <article class="stat-card"><span class="stat-icon orange">✧</span><span class="stat-label">BEST STREAK</span><strong id="best-streak">0</strong><div class="stat-note">Targets in a row</div></article>
+          <article class="stat-card"><span class="stat-icon green">↗</span><span class="stat-label">AI ADJUSTMENTS</span><strong id="adjustments">0</strong><div class="stat-note">Difficulty changes</div></article>
+        </div>
+        <article class="chart-card">
+          <div class="card-heading"><div><h3>Reaction time</h3><span>Milliseconds per hit</span></div><span class="chart-legend"><i></i> Your speed</span></div>
+          <div class="chart-wrap"><canvas id="reaction-chart" aria-label="Reaction time chart" role="img"></canvas><div id="chart-empty" class="chart-empty">Your hit history will appear here</div></div>
+        </article>
+        <article class="learning-card"><div class="learning-title"><span>✦</span><strong>AI learning</strong><span id="learning-count">0 observations</span></div><p id="learning-message">Play a few targets to help the AI find your sweet spot.</p><div class="learning-meter"><span id="learning-meter-fill"></span></div></article>
+        <article class="history-card"><div class="card-heading"><div><h3>Recent games</h3><span>Your best runs on this device</span></div><button id="clear-history" class="text-button" type="button">Clear</button></div><div id="history-list" class="history-list"><div class="history-empty">Complete a game to see it here.</div></div></article>
+      </aside>
+    </section>
+    <footer><span>ADAPTIVE ARCADE</span><span>Q-learning · Your progress stays on this device</span></footer>
+  </main>
+  <script src="app.js" defer></script>
+</body>
+</html>
